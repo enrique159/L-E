@@ -22,6 +22,17 @@ npm start
 
 La API quedará disponible internamente en `http://127.0.0.1:3333`. Publícala mediante un dominio HTTPS y un proxy inverso antes de conectarla con el frontend de Netlify.
 
+En producción debes configurar `CORS_ORIGINS` con el dominio exacto de Netlify. Si necesitas varios dominios, sepáralos con comas. El administrador inicial se crea únicamente cuando no existe `ADMIN_USERNAME` y está configurada `ADMIN_PASSWORD`.
+
+## Panel administrativo
+
+El frontend incluye estas rutas:
+
+- `/admin/login`: inicio de sesión
+- `/admin`: gestión de invitados y confirmaciones
+
+La sesión usa el JWT de `POST /api/auth/login`. Los listados y todas las operaciones de administración requieren rol `admin`.
+
 Usuario inicial:
 
 - `username`: `admin`

@@ -27,3 +27,10 @@ VITE_API_BASE_URL=https://api.tudominio.com
 ```
 
 La URL debe usar HTTPS para que el navegador permita las peticiones desde el sitio publicado en Netlify.
+
+## Panel administrativo
+
+- `/admin/login`: acceso con usuario y contraseña.
+- `/admin`: tablas de invitados y confirmaciones RSVP.
+
+El panel conserva el JWT sólo durante la sesión de la pestaña y cierra la sesión cuando el backend devuelve un token inválido o expirado.

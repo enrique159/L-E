@@ -2,7 +2,7 @@ import { Router } from 'express'
 import { z } from 'zod'
 import { AppDataSource } from '../config/data-source'
 import { Guest } from '../entities/Guest'
-import { authGuard } from '../middleware/auth'
+import { authGuard, requireRole } from '../middleware/auth'
 import { validateBody } from '../middleware/validate'
 import { toPublicGuest } from '../utils/serializers'
 
@@ -22,7 +22,7 @@ const guestUpdateSchema = guestCreateSchema.partial()
 
 export const guestsRouter = Router()
 
-guestsRouter.use(authGuard)
+guestsRouter.use(authGuard, requireRole('admin'))
 
 guestsRouter.get('/', async (req, res) => {
   const { already_invited: alreadyInvited, group, priority } = req.query
