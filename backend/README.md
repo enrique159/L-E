@@ -42,6 +42,21 @@ Usuario inicial:
 - `GET /api/guests/:id`
 - `PATCH /api/guests/:id`
 - `DELETE /api/guests/:id`
+- `POST /api/rsvps` público; registra una confirmación única por teléfono
+
+Ejemplo de confirmación:
+
+```json
+{
+  "name": "María García",
+  "phone": "6691234567",
+  "attendance": "yes",
+  "guest_count": 2,
+  "note": "Una persona requiere menú vegetariano"
+}
+```
+
+El teléfono se normaliza a 10 dígitos en el servidor. Si ya existe, la API responde con estado `409` y código `RSVP_PHONE_EXISTS`.
 
 Usa el token JWT en la cabecera:
 

@@ -387,14 +387,14 @@
           <p class="section-kicker section-kicker-light">Répondez s'il vous plaît</p>
           <h2>¿Nos acompañas?</h2>
           <p>
-            Agradecemos tu confirmación antes del <strong>15 de diciembre de 2026</strong>. Prepara tu
-            mensaje y compártelo con nosotros por tu aplicación favorita.
+            Agradecemos tu confirmación antes del <strong>15 de diciembre de 2026</strong>. Registra
+            una respuesta por teléfono para ayudarnos a preparar cada detalle.
           </p>
           <div class="rsvp-signature">Lizbeth &amp; Enrique</div>
         </div>
 
         <div class="rsvp-card" data-reveal="right">
-          <form v-if="!rsvpPrepared" @submit.prevent="prepareRsvp">
+          <form v-if="!rsvpPrepared" :aria-busy="isRsvpSubmitting" @submit.prevent="prepareRsvp">
             <div class="field-group">
               <label for="guest-name">Tu nombre</label>
               <input
@@ -405,6 +405,26 @@
                 placeholder="Nombre y apellido"
                 required
               />
+            </div>
+
+            <div class="field-group">
+              <label for="guest-phone">Teléfono celular</label>
+              <input
+                id="guest-phone"
+                :value="rsvp.phone"
+                type="tel"
+                inputmode="numeric"
+                autocomplete="tel-national"
+                placeholder="(669) 123 4567"
+                maxlength="14"
+                pattern="\(\d{3}\) \d{3} \d{4}"
+                aria-describedby="guest-phone-help"
+                required
+                @input="handlePhoneInput"
+              />
+              <small id="guest-phone-help" class="field-help">
+                Usaremos los 10 dígitos para evitar registros duplicados.
+              </small>
             </div>
 
             <fieldset class="field-group attendance-options">
@@ -440,21 +460,29 @@
               ></textarea>
             </div>
 
-            <button class="button button-moss button-full" type="submit">
-              Preparar confirmación <ChevronRight :size="18" aria-hidden="true" />
+            <button
+              class="button button-moss button-full"
+              type="submit"
+              :disabled="isRsvpSubmitting"
+            >
+              {{ isRsvpSubmitting ? 'Guardando respuesta…' : 'Confirmar asistencia' }}
+              <ChevronRight v-if="!isRsvpSubmitting" :size="18" aria-hidden="true" />
             </button>
+            <p v-if="rsvpError" class="form-status is-error" role="alert">{{ rsvpError }}</p>
           </form>
 
           <div v-else class="rsvp-ready">
             <CircleCheck :size="44" stroke-width="1.35" aria-hidden="true" />
-            <p class="section-kicker">Tu respuesta está lista</p>
-            <h3>Compártela con los novios</h3>
+            <p class="section-kicker">Confirmación recibida</p>
+            <h3>Gracias, guardamos tu respuesta</h3>
+            <p class="rsvp-saved-copy">
+              Tu registro quedó asociado al teléfono {{ rsvp.phone }}.
+            </p>
             <textarea :value="rsvpMessage" rows="6" readonly aria-label="Mensaje de confirmación"></textarea>
             <button class="button button-moss button-full" type="button" @click="shareRsvp">
               <Share2 :size="18" aria-hidden="true" />
               {{ shareButtonLabel }}
             </button>
-            <button class="text-button" type="button" @click="editRsvp">Editar respuesta</button>
             <p class="share-status" aria-live="polite">{{ shareStatus }}</p>
           </div>
         </div>
@@ -543,6 +571,7 @@ import {
   Trees,
   UtensilsCrossed,
 } from '@lucide/vue'
+import { apiUrl } from './config/api'
 
 const EVENT_DATE = new Date('2027-01-09T17:30:00-07:00')
 
@@ -557,6 +586,8 @@ const musicCurrentTime = ref(0)
 const musicDuration = ref(0)
 const now = ref(new Date())
 const rsvpPrepared = ref(false)
+const isRsvpSubmitting = ref(false)
+const rsvpError = ref('')
 const shareStatus = ref('')
 const canNativeShare = ref(false)
 const timers = new Set()
@@ -565,6 +596,7 @@ let revealObserver
 
 const rsvp = reactive({
   name: '',
+  phone: '',
   attendance: 'yes',
   guests: '1',
   note: '',
@@ -782,14 +814,66 @@ function updateMusicProgress() {
   musicDuration.value = musicPlayer.value.duration || 0
 }
 
-function prepareRsvp() {
-  rsvpPrepared.value = true
-  shareStatus.value = ''
+function handlePhoneInput(event) {
+  rsvp.phone = formatPhone(event.target.value)
 }
 
-function editRsvp() {
-  rsvpPrepared.value = false
+function normalizePhone(value) {
+  return value.replace(/\D/g, '').slice(0, 10)
+}
+
+function formatPhone(value) {
+  const digits = normalizePhone(value)
+  if (!digits) return ''
+  if (digits.length <= 3) return `(${digits}`
+  if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`
+  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)} ${digits.slice(6)}`
+}
+
+async function prepareRsvp() {
+  rsvpError.value = ''
   shareStatus.value = ''
+
+  const phone = normalizePhone(rsvp.phone)
+  if (phone.length !== 10) {
+    rsvpError.value = 'Escribe un teléfono celular de 10 dígitos.'
+    return
+  }
+
+  isRsvpSubmitting.value = true
+
+  try {
+    const response = await fetch(apiUrl('/api/rsvps'), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: rsvp.name,
+        phone,
+        attendance: rsvp.attendance,
+        guest_count: rsvp.attendance === 'yes' ? Number(rsvp.guests) : 0,
+        note: rsvp.note,
+      }),
+    })
+
+    const result = await response.json().catch(() => ({}))
+
+    if (!response.ok) {
+      if (response.status === 409 && result.code === 'RSVP_PHONE_EXISTS') {
+        throw new Error('Este teléfono ya tiene una confirmación registrada.')
+      }
+
+      throw new Error(result.message || 'No pudimos guardar tu confirmación.')
+    }
+
+    rsvpPrepared.value = true
+  } catch (error) {
+    rsvpError.value =
+      error instanceof Error
+        ? error.message
+        : 'No pudimos conectar con la invitación. Inténtalo nuevamente.'
+  } finally {
+    isRsvpSubmitting.value = false
+  }
 }
 
 async function shareRsvp() {

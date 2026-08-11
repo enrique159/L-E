@@ -1939,6 +1939,7 @@ textarea:focus-visible {
 }
 
 .field-group input[type="text"],
+.field-group input[type="tel"],
 .field-group select,
 .field-group textarea,
 .rsvp-ready textarea {
@@ -1952,15 +1953,47 @@ textarea:focus-visible {
 }
 
 .field-group input[type="text"]:focus,
+.field-group input[type="tel"]:focus,
 .field-group select:focus,
 .field-group textarea:focus {
   border-color: var(--moss-deep);
   background: rgba(179, 201, 214, 0.12);
 }
 
+.field-help {
+  display: block;
+  margin-top: 0.45rem;
+  color: rgba(45, 53, 54, 0.62);
+  font-size: 0.7rem;
+  line-height: 1.45;
+}
+
+.form-status {
+  margin: 0.9rem 0 0;
+  font-size: 0.76rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.form-status.is-error {
+  color: #8a2f2f;
+}
+
+.rsvp-card .button:disabled {
+  cursor: wait;
+  opacity: 0.68;
+}
+
 .field-group textarea,
 .rsvp-ready textarea {
   resize: vertical;
+  line-height: 1.55;
+}
+
+.rsvp-saved-copy {
+  margin: -0.5rem 0 1.25rem;
+  color: rgba(45, 53, 54, 0.72);
+  font-size: 0.82rem;
   line-height: 1.55;
 }
 

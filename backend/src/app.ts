@@ -2,6 +2,7 @@ import cors from 'cors'
 import express from 'express'
 import { authRouter } from './routes/auth.routes'
 import { guestsRouter } from './routes/guests.routes'
+import { rsvpsRouter } from './routes/rsvps.routes'
 import { usersRouter } from './routes/users.routes'
 import { errorHandler } from './middleware/error-handler'
 
@@ -17,5 +18,6 @@ app.get('/health', (_req, res) => {
 app.use('/api/auth', authRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/guests', guestsRouter)
+app.use('/api/rsvps', rsvpsRouter)
 
 app.use(errorHandler)

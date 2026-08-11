@@ -2,6 +2,7 @@ import 'reflect-metadata'
 import { DataSource } from 'typeorm'
 import { env } from './env'
 import { Guest } from '../entities/Guest'
+import { Rsvp } from '../entities/Rsvp'
 import { User } from '../entities/User'
 
 export const AppDataSource = new DataSource({
@@ -14,5 +15,5 @@ export const AppDataSource = new DataSource({
   // Este proyecto administra el esquema directamente con TypeORM en todos los entornos.
   synchronize: true,
   logging: env.db.logging,
-  entities: [User, Guest],
+  entities: [User, Guest, Rsvp],
 })
