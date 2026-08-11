@@ -11,7 +11,8 @@ export const AppDataSource = new DataSource({
   username: env.db.username,
   password: env.db.password,
   database: env.db.database,
-  synchronize: env.db.synchronize,
+  // Este proyecto administra el esquema directamente con TypeORM en todos los entornos.
+  synchronize: true,
   logging: env.db.logging,
   entities: [User, Guest],
 })

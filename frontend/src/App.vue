@@ -47,7 +47,7 @@
                 <span class="letter-kicker">Nos casamos</span>
                 <span class="letter-names">Lizbeth <em>&amp;</em> Enrique</span>
                 <span class="letter-rule"></span>
-                <span class="letter-date">12 · 09 · 2026</span>
+                <span class="letter-date">09 · 01 · 2027</span>
               </span>
               <span class="envelope-flap envelope-flap-top"></span>
               <span class="envelope-flap envelope-flap-left"></span>
@@ -104,7 +104,7 @@
               <span>Enrique</span>
             </h1>
           </div>
-          <p class="hero-date">Sábado · 12 de septiembre · 2026</p>
+          <p class="hero-date">Sábado · 9 de enero · 2027</p>
           <p class="hero-intro">
             Elegimos el para siempre y queremos celebrarlo rodeados de las personas que han sido
             parte de nuestra historia.
@@ -126,7 +126,7 @@
             <span class="photo-number">01</span>
           </div>
           <div class="hero-seal" aria-hidden="true">L · E</div>
-          <p class="hero-side-note">Doce · Septiembre · Dos mil veintiséis</p>
+          <p class="hero-side-note">Nueve · Enero · Dos mil veintisiete</p>
         </div>
 
         <a class="scroll-cue" href="#historia" aria-label="Continuar a nuestra historia">
@@ -229,20 +229,20 @@
 
         <div class="calendar-card" data-reveal="up">
           <div class="calendar-header">
-            <span>Septiembre</span>
-            <strong>2026</strong>
+            <span>Enero</span>
+            <strong>2027</strong>
           </div>
           <div class="calendar-grid calendar-weekdays" aria-hidden="true">
             <span v-for="day in weekDays" :key="day">{{ day }}</span>
           </div>
-          <div class="calendar-grid" aria-label="Calendario de septiembre de 2026, boda el día 12">
+          <div class="calendar-grid" aria-label="Calendario de enero de 2027, boda el día 9">
             <span
               v-for="(day, index) in calendarDays"
               :key="`${day}-${index}`"
-              :class="{ 'is-empty': !day, 'is-wedding-day': day === 12 }"
+              :class="{ 'is-empty': !day, 'is-wedding-day': day === 9 }"
             >
               {{ day || '' }}
-              <Heart v-if="day === 12" :size="42" aria-hidden="true" />
+              <Heart v-if="day === 9" :size="42" aria-hidden="true" />
             </span>
           </div>
           <p>El gran día · 05:30 PM</p>
@@ -387,7 +387,7 @@
           <p class="section-kicker section-kicker-light">Répondez s'il vous plaît</p>
           <h2>¿Nos acompañas?</h2>
           <p>
-            Agradecemos tu confirmación antes del <strong>15 de agosto de 2026</strong>. Prepara tu
+            Agradecemos tu confirmación antes del <strong>15 de diciembre de 2026</strong>. Prepara tu
             mensaje y compártelo con nosotros por tu aplicación favorita.
           </p>
           <div class="rsvp-signature">Lizbeth &amp; Enrique</div>
@@ -479,7 +479,7 @@
             todavía más especial.
           </p>
           <div class="closing-names">Lizbeth <i>&amp;</i> Enrique</div>
-          <p class="closing-date">12 · 09 · 2026</p>
+          <p class="closing-date">09 · 01 · 2027</p>
           <button class="replay-button" type="button" @click="replayIntro">
             <DoorOpen :size="17" aria-hidden="true" /> Volver a ver el sobre
           </button>
@@ -544,7 +544,7 @@ import {
   UtensilsCrossed,
 } from '@lucide/vue'
 
-const EVENT_DATE = new Date('2026-09-12T17:30:00-07:00')
+const EVENT_DATE = new Date('2027-01-09T17:30:00-07:00')
 
 const gateVisible = ref(true)
 const introState = ref('sealed')
@@ -621,7 +621,44 @@ const recommendations = [
 ]
 
 const weekDays = ['D', 'L', 'M', 'M', 'J', 'V', 'S']
-const calendarDays = [null, null, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+const calendarDays = [
+  null,
+  null,
+  null,
+  null,
+  null,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  30,
+  31,
+]
 
 const timeRemaining = computed(() => {
   const difference = Math.max(EVENT_DATE.getTime() - now.value.getTime(), 0)
@@ -662,8 +699,8 @@ const rsvpMessage = computed(() => {
   const greeting = `Hola Lizbeth y Enrique, soy ${rsvp.name}.`
   const response =
     rsvp.attendance === 'yes'
-      ? `Con mucha ilusión confirmo mi asistencia para ${rsvp.guests} ${rsvp.guests === '1' ? 'persona' : 'personas'} a su boda del 12 de septiembre.`
-      : 'Lamento no poder acompañarlos el 12 de septiembre, pero estaré celebrando su amor a la distancia.'
+      ? `Con mucha ilusión confirmo mi asistencia para ${rsvp.guests} ${rsvp.guests === '1' ? 'persona' : 'personas'} a su boda del 9 de enero de 2027.`
+      : 'Lamento no poder acompañarlos el 9 de enero de 2027, pero estaré celebrando su amor a la distancia.'
   const note = rsvp.note ? `\n\nMensaje: ${rsvp.note}` : ''
 
   return `${greeting}\n\n${response}${note}`

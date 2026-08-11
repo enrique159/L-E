@@ -1,5 +1,29 @@
-# Vue 3 + Vite
+# Invitación de boda · Lizbeth y Enrique
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Frontend de la invitación construido con Vue y Vite.
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+## Desarrollo local
+
+```bash
+npm install
+npm run dev
+```
+
+El archivo `.env.development` conecta el frontend local con la API en `http://localhost:3333`.
+
+## Netlify
+
+El archivo `netlify.toml` de la raíz configura automáticamente:
+
+- directorio base: `frontend`
+- comando de construcción: `npm run build`
+- directorio publicado: `frontend/dist`
+- fallback de SPA hacia `index.html`
+
+En **Project configuration → Environment variables** de Netlify agrega:
+
+```env
+VITE_API_BASE_URL=https://api.tudominio.com
+```
+
+La URL debe usar HTTPS para que el navegador permita las peticiones desde el sitio publicado en Netlify.

@@ -10,7 +10,17 @@ npm install
 npm run dev
 ```
 
-Antes de iniciar, crea la base de datos indicada en `DB_DATABASE`. Con `DB_SYNCHRONIZE=true`, TypeORM crea las tablas automáticamente en desarrollo.
+Antes de iniciar, crea la base de datos indicada en `DB_DATABASE`. La API escucha en el puerto `3333` tanto en desarrollo como en producción. TypeORM mantiene `synchronize` activo en todos los entornos y crea o actualiza las tablas automáticamente.
+
+Para producción en el VPS:
+
+```bash
+npm ci
+npm run build
+npm start
+```
+
+La API quedará disponible internamente en `http://127.0.0.1:3333`. Publícala mediante un dominio HTTPS y un proxy inverso antes de conectarla con el frontend de Netlify.
 
 Usuario inicial:
 

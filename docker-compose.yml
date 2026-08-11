@@ -27,7 +27,7 @@ services:
     container_name: wedding_backend
     restart: unless-stopped
     environment:
-      PORT: 3000
+      PORT: 3333
       JWT_SECRET: change-me-before-production
       JWT_EXPIRES_IN: 8h
       DB_HOST: mysql
@@ -35,10 +35,9 @@ services:
       DB_USERNAME: wedding_user
       DB_PASSWORD: wedding_password
       DB_DATABASE: wedding_invitation
-      DB_SYNCHRONIZE: "true"
       DB_LOGGING: "false"
     ports:
-      - "3000:3000"
+      - "3333:3333"
     depends_on:
       mysql:
         condition: service_healthy
