@@ -2403,6 +2403,7 @@ textarea:focus-visible {
 
   .hero-copy {
     z-index: 6;
+    min-width: 0;
     width: 100%;
     padding: 8.5rem 1.5rem 6rem;
     color: var(--plaster-light);
@@ -2420,6 +2421,7 @@ textarea:focus-visible {
   }
 
   .hero-title {
+    min-width: 0;
     width: min(100%, 32rem);
     font-size: clamp(5.2rem, 23vw, 8.8rem);
     text-shadow: 0 3px 24px rgba(0, 0, 0, 0.22);
@@ -2570,6 +2572,10 @@ textarea:focus-visible {
 }
 
 @media (max-width: 680px) {
+  .hero-title {
+    font-size: clamp(4rem, 19vw, 6rem);
+  }
+
   .nav-links > a:not(.nav-rsvp) {
     display: none;
   }
@@ -2665,12 +2671,17 @@ textarea:focus-visible {
   }
 
   .hero-title {
-    font-size: clamp(5rem, 25vw, 7rem);
+    font-size: clamp(4rem, 19vw, 6rem);
   }
 
   .hero-title span:last-child {
     align-self: flex-start;
     margin-left: 0.42em;
+  }
+
+  .scroll-cue {
+    right: auto;
+    left: 1.2rem;
   }
 
   .hero-intro {
