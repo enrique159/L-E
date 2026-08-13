@@ -1748,7 +1748,7 @@ textarea:focus-visible {
   aspect-ratio: 1.5;
   border: 1px solid rgba(45, 53, 54, 0.24);
   border-radius: 0.25rem;
-  background: rgba(242, 239, 226, 0.7);
+  background: rgba(242, 239, 226, 0.5);
   box-shadow: 0.75rem 0.75rem 0 rgba(45, 53, 54, 0.12);
   transform: rotate(-4deg);
 }

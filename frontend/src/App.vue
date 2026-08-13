@@ -95,9 +95,9 @@
         <div class="hero-orbit hero-orbit-two" aria-hidden="true"></div>
 
         <div class="hero-copy">
-          <p class="eyebrow hero-eyebrow">Nuestra boda · Mazatlán</p>
-          <div class="hero-title-wrap">
-            <p class="hero-pretitle">Celebremos</p>
+          <p class="eyebrow hero-eyebrow">UN NUEVO CAPÍTULO</p>
+          <div class="hero-title-wrap" style="margin-top: 2rem">
+            <!-- <p class="hero-pretitle">Celebremos</p> -->
             <h1 class="hero-title">
               <span>Lizbeth</span>
               <b>&amp;</b>
@@ -175,7 +175,7 @@
               ref="musicPlayer"
               preload="none"
               loop
-              src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Gymnopedie_No._1_%28ISRC_USUAN1100787%29.mp3"
+              src="/music/Kevin%20Kaarl%20-%20San%20Lucas.mp3"
               @play="isMusicPlaying = true"
               @pause="isMusicPlaying = false"
               @timeupdate="updateMusicProgress"
@@ -195,7 +195,7 @@
             </button>
             <div class="music-meta">
               <span class="music-label">Para acompañar esta invitación</span>
-              <strong>Gymnopédie No. 1</strong>
+              <strong>San Lucas · Kevin Kaarl</strong>
               <span class="music-time">{{ formattedMusicTime }}</span>
             </div>
             <div class="music-wave" aria-hidden="true">
@@ -351,14 +351,14 @@
             <p class="guide-number">02</p>
             <p class="section-kicker">Sugerencia de regalo</p>
             <h3>Tu presencia es lo más importante</h3>
-            <p>
-              El mejor regalo será compartir este día contigo. Si deseas tener un detalle con
-              nosotros, contaremos con una caja de sobres durante la recepción.
-            </p>
             <div class="envelope-gift" aria-hidden="true">
               <span></span>
               <em>L · E</em>
             </div>
+            <p style="color: white; position: relative; z-index: 1">
+              El mejor regalo será compartir este día contigo. Si deseas tener un detalle con
+              nosotros, contaremos con una caja de sobres durante la recepción.
+            </p>
           </article>
         </div>
       </section>
@@ -514,13 +514,7 @@
         </div>
         <div class="footer-meta">
           <span>Hecho con amor para nuestro gran día</span>
-          <a
-            href="https://commons.wikimedia.org/wiki/File:Gymnopedie_No._1_(ISRC_USUAN1100787).mp3"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Música: Kevin MacLeod · CC BY 3.0
-          </a>
+          <span>Música: San Lucas · Kevin Kaarl</span>
         </div>
       </footer>
 
@@ -723,7 +717,7 @@ const musicProgressStyle = computed(() => ({
 
 const formattedMusicTime = computed(() => {
   const current = formatTime(musicCurrentTime.value)
-  const duration = musicDuration.value ? formatTime(musicDuration.value) : '3:07'
+  const duration = musicDuration.value ? formatTime(musicDuration.value) : '4:07'
   return `${current} / ${duration}`
 })
 
