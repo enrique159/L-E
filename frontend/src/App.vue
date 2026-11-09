@@ -356,8 +356,9 @@
               <em>L · E</em>
             </div>
             <p style="color: white; position: relative; z-index: 1">
-              El mejor regalo será compartir este día contigo. Si deseas tener un detalle con
-              nosotros, contaremos con una caja de sobres durante la recepción.
+              Tu presencia es lo más importante. Si deseas hacernos un regalo, recibiremos con
+              mucho cariño una aportación en efectivo. Encontrarás sobres a la entrada del salón;
+              pensamos que así es más fácil y práctico para todos.
             </p>
           </article>
         </div>
