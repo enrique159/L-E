@@ -264,7 +264,7 @@
             <p class="event-type">{{ event.type }}</p>
             <h3>{{ event.title }}</h3>
             <p class="event-time">{{ event.time }}</p>
-            <p class="event-place">{{ event.place }}</p>
+            <p v-if="event.place" class="event-place">{{ event.place }}</p>
             <p class="event-address">{{ event.address }}</p>
             <a :href="event.map" target="_blank" rel="noreferrer">
               Ver ubicación <ArrowUpRight :size="16" aria-hidden="true" />
@@ -601,27 +601,27 @@ const events = [
     icon: Church,
     number: '01',
     type: 'Ceremonia',
-    title: 'Jardín principal',
+    title: 'Parroquia San Juan Bautista',
     time: '05:30 PM',
-    place: 'Jardín Las Rosas',
-    address: 'Av. de los Encinos 248 · Salón Terraza',
-    map: 'https://www.google.com/maps/search/?api=1&query=Jard%C3%ADn+Las+Rosas+Av.+de+los+Encinos+248',
+    place: '',
+    address: 'Sierra San Pedro Mártir Esq. Sierra de la Victoria, 8 de Octubre 2da Secc.',
+    map: 'https://www.google.com/maps/search/?api=1&query=Parroquia+San+Juan+Bautista+Sierra+San+Pedro+M%C3%A1rtir+Esq.+Sierra+de+la+Victoria%2C+8+de+Octubre+2da+Secc.',
   },
   {
     icon: PartyPopper,
     number: '02',
     type: 'Recepción',
     title: 'Cena & celebración',
-    time: '07:00 PM',
-    place: 'Salón Terraza',
-    address: 'A unos pasos de la ceremonia',
-    map: 'https://www.google.com/maps/search/?api=1&query=Jard%C3%ADn+Las+Rosas+Av.+de+los+Encinos+248',
+    time: '09:00 PM',
+    place: 'Jardín La Ceiba',
+    address: 'Belisario Domínguez Esq. Lic. Benito Juárez, Centro.',
+    map: 'https://maps.app.goo.gl/KAWMUqmaKwCMxMrm9',
   },
 ]
 
 const timeline = [
   { icon: MapPin, time: '05:00 PM', title: 'Llegada', text: 'Recepción de invitados y bienvenida.' },
-  { icon: Heart, time: '05:30 PM', title: 'Ceremonia', text: 'Intercambio de votos en el jardín principal.' },
+  { icon: Heart, time: '05:30 PM', title: 'Ceremonia', text: 'Intercambio de votos en la Parroquia San Juan Bautista.' },
   { icon: GlassWater, time: '06:30 PM', title: 'Cóctel', text: 'Fotografías, bocadillos y primeras copas.' },
   { icon: UtensilsCrossed, time: '07:30 PM', title: 'Cena', text: 'Cena servida, brindis y palabras especiales.' },
   { icon: Music2, time: '09:00 PM', title: 'Fiesta', text: 'Abrimos la pista para celebrar juntos.' },
